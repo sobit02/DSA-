@@ -1,0 +1,28 @@
+//https://leetcode.com/problems/subsets-ii/
+//This  is the extension of subset 1
+//contains duplicate elemets which causes duplicate combinations
+//we have to filter out duplicate combinations
+class Solution {
+    public List<List<Integer>> subsetsWithDup(int[] nums) {
+        Arrays.sort(nums);
+        List<Integer> ds = new ArrayList<>();
+        List<List<Integer>> ans = new ArrayList<>();
+        sets(nums,0,ds,ans);
+        return ans;
+    } 
+
+    public void sets(int[] arr,int i ,List<Integer> ds,List<List<Integer>> ans){
+        ans.add(new ArrayList<>(ds));
+
+       //No base condintion because eventually for loop will end our program naturally.
+           
+        for(int j = i ; j <= arr.length-1; j++){
+            if(j!=i && arr[j] == arr[j-1]) continue;           //This is the main condition for filtering out duplicate combinations
+            
+            ds.add(arr[j]);
+            sets(arr,j+1,ds,ans);
+            ds.remove(ds.size() - 1);
+        }
+            
+       }
+}
