@@ -1,0 +1,39 @@
+https://leetcode.com/problems/letter-combinations-of-a-phone-number/
+//Again its a pick and not pick recursion 
+
+class Solution {
+    public List<String> letterCombinations(String digits) {
+        HashMap<Integer,String> mpp = new HashMap<>();               //Had to make hashmap for question problem read the description of problem
+        mpp.put(2,"abc");
+        mpp.put(3,"def");
+        mpp.put(4,"ghi");
+        mpp.put(5,"jkl");
+        mpp.put(6,"mno");
+        mpp.put(7,"pqrs");
+        mpp.put(8,"tuv");
+        mpp.put(9,"wxyz");
+
+        List<String> ans = new ArrayList();
+        if(digits.length() == 0) return ans;                      // a condition to encounter empty value for String digits
+        comb(0,digits,mpp,ans,new StringBuilder());                      
+        
+        return ans;
+
+
+
+       
+    }
+    public void comb(int ind,String digits,HashMap<Integer,String> mpp,List<String> ans,StringBuilder str){
+        if(ind == digits.length()){
+             ans.add(str.toString());
+             return;
+        }
+        String ltr = mpp.get(digits.charAt(ind) - '0');
+
+        for(int i = 0; i < ltr.length() ;i++){
+            str.append(ltr.charAt(i));
+            comb(ind+1,digits,mpp,ans,str);
+            str.deleteCharAt(str.length() - 1);
+        }
+    }
+}
