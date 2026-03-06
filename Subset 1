@@ -1,3 +1,5 @@
+//https://leetcode.com/problems/subsets/description/
+//Pick and not Pick recursion
 class Solution {
     public List<List<Integer>> subsets(int[] nums) {
         List<Integer> ds = new ArrayList<>();
@@ -7,19 +9,20 @@ class Solution {
     }
 
     public void sets(int[] arr,int i ,List<Integer> ds,List<List<Integer>> ans){
+     //base condition (very imp for backtracking)
         if(i==arr.length){
             ans.add(new ArrayList<>(ds));
             return;
         }
       
-            ds.add(arr[i]);
+            ds.add(arr[i]);                // adding elements
+            sets(arr,i+1,ds,ans);          //recursive call
+
+            //when after adding elements,recurcise call is made when it is completed
+            //we have to go level up in recursive tree for that we have to remove the element
+
+            ds.remove(ds.size() - 1);       //removing elmts
             sets(arr,i+1,ds,ans);
-
-            ds.remove(ds.size() - 1);
-            
-       
-
-        sets(arr,i+1,ds,ans);
 
     }
 
