@@ -1,0 +1,21 @@
+//https://leetcode.com/problems/isomorphic-strings/
+//Basically returns true if mapping is one-one otherwise returns false
+
+class Solution {
+    public boolean isIsomorphic(String s, String t) {
+        HashMap<Character,Character> stmap = new HashMap<>();        // s to t hashmap
+        HashMap<Character,Character> tsmap = new HashMap<>();        // t to s hashmap
+
+        for(int i = 0 ; i< s.length();i++){
+            char sc = s.charAt(i);
+            char tc = t.charAt(i);
+            
+            if(stmap.containsKey(sc) && stmap.get(sc)!=tc) return false;             //this is very important check each for two hashmaps
+            if(tsmap.containsKey(tc) && tsmap.get(tc)!=sc) return false;             //search for hashmap conflicts and try to think what is happening
+
+            stmap.put(sc,tc);                                       //putting key-value ie s to t in hashmap
+            tsmap.put(tc,sc);                                       //putting key-value ie t to s in hashmap
+        }
+        return true;
+    }
+}    
