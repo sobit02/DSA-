@@ -1,0 +1,22 @@
+https://leetcode.com/problems/maximum-nesting-depth-of-the-parentheses/
+
+class Solution {
+    public int maxDepth(String s) {
+        
+        int max = 0;
+        int depth = 0;
+        for(int i = 0 ; i < s.length() ; i++){
+            char c = s.charAt(i);
+            if(c == '('){                    // checking depth at every instances
+                depth++;                          
+                max = Math.max(max,depth);   // checking is it maximum or not.
+            }
+            if(c == ')'){
+                depth--;
+            }
+    
+
+        }
+        return max;
+    }
+}
