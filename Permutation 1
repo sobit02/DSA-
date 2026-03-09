@@ -1,0 +1,32 @@
+//https://leetcode.com/problems/permutations/
+//TimeComplexicity = O(n*n!)     observed from recursion tree
+//space complexicity = O(n*n!)   observed from recursion tree
+
+class Solution {
+    public List<List<Integer>> permute(int[] nums) {
+        List<Integer> ds = new ArrayList<>();
+        List<List<Integer>> ans = new ArrayList<>();
+        boolean[] used = new boolean[nums.length];
+        for(int i = 0;i < used.length ;i++){
+            used[i] = false;
+        }
+        pcomb(nums,ds,ans,used);
+        return ans;
+    }
+
+    public void pcomb(int[] arr ,List<Integer> ds,List<List<Integer>> ans,boolean[] used){
+        if(arr.length == ds.size()){
+            ans.add(new ArrayList(ds));
+        }
+
+        for(int i = 0 ; i < arr.length ; i++){
+            if(used[i] == false){
+                ds.add(arr[i]);
+                used[i] = true;
+                pcomb(arr,ds,ans,used);
+                ds.remove(ds.size() - 1);
+                used[i] = false;
+            }
+        }
+    }
+}
