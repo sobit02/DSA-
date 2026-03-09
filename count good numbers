@@ -1,0 +1,45 @@
+//https://leetcode.com/problems/count-good-numbers/
+//simple permutation used in this problem
+class Solution {
+    long MOD = 1000000007;                                //Global variable is used 
+    public int countGoodNumbers(long n) {
+       
+        if(n==1){                                                 //all the if condition are basic maths permutation observations.
+            return 5;                                             //You can easliy generalise the formula for odd n and even n.
+        }
+        if(n>1 && n%2==0){
+           n = n/2;
+           long ans = (myPow(5L,n)*myPow(4L,n))%MOD;              
+           return (int)ans;
+        }
+        if(n>1 && n%2==1){
+            n=(n+1)/2;
+            long ans = (myPow(5L,n)*myPow(4L,n-1))%MOD;
+            return (int)ans;
+        }
+        return 0;
+    }
+
+
+    public long myPow(long x, long n) {            //to x^n I made this function(its a separate probelem on leetcode)
+                                                   //Basically looping for n times becomes too time taking
+        long ans = 1;                              
+
+       
+
+        while(n>0){                              //this will reduce the no of iteration thus making it more optimal
+            if(n%2==0){
+                x = x*x;
+                x= x%MOD;                       //this will prevent overflow as x is long but inputs provided can cause overflow
+                n = n/2;                        //Given in leetcode to modulo 10^7
+            }
+            else{
+                n = n -1;
+                ans = ans*x;
+                ans = ans%MOD;             //preventing overflow
+            }
+        }
+        return ans%MOD;
+
+    }
+}
