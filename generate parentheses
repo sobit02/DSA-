@@ -1,0 +1,34 @@
+//https://leetcode.com/problems/generate-parentheses/
+
+class Solution {
+    public List<String> generateParenthesis(int n) {
+        StringBuilder sb = new StringBuilder("");
+        List<String> ans = new ArrayList<>();
+        int openused = 0;
+        int closeused = 0;
+        comma(openused ,closeused ,sb ,ans,n);
+        return ans;
+
+        
+    }
+    public void comma(int ou , int cu ,StringBuilder sb , List<String> ans,int n){
+     //base condition
+        if(sb.length() == 2*n){
+            ans.add(sb.toString());
+            return;
+        }
+    //condition1
+        if(ou < n){
+            sb.append('(');
+            comma(ou+1,cu,sb,ans,n);
+            sb.deleteCharAt(sb.length() - 1);
+        }
+    //condition2
+        if(ou > cu){
+            sb.append(')');
+            comma(ou,cu+1,sb,ans,n);
+            sb.deleteCharAt(sb.length() - 1);
+
+        }
+    }
+}
